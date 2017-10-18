@@ -12,3 +12,4 @@ RUN apt update -qq && apt install -y \
         git \
         build-essential \
         libssl-dev \
+    && rm -rf /var/lib/apt/lists/*
