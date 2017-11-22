@@ -13,3 +13,5 @@ RUN apt update -qq && apt install -y \
         build-essential \
         libssl-dev \
     && rm -rf /var/lib/apt/lists/*
+
+ENTRYPOINT ["/JohnTheRipper/run/john"]
