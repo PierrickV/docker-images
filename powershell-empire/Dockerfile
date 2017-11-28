@@ -14,7 +14,7 @@ RUN apt update -qq && apt install -y \
 			apt-transport-https \
 			libcrypto++-dev \
 			libz-dev \
-		 	libxml2-dev \
+			libxml2-dev \
 			git \
 			build-essential \
 			swig \
