@@ -1,0 +1,19 @@
+version: "3"
+services:
+
+  neo4j:
+    image: neo4j:3.2
+    container_name: neo4j
+    volumes:
+      - $HOME/.neo4j/data:/data
+      - ./neo4j-auth-file:/data/dbms/auth
+
+  bloodhound:
+     build: .
+     container_name: bloodhound
+     depends_on:
+       - neo4j
+     environment:
+       - DISPLAY=$DISPLAY
+     volumes:
+       - /tmp/.X11-unix:/tmp/.X11-unix
