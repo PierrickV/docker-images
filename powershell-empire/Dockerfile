@@ -2,6 +2,7 @@ FROM debian:stretch
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV EMPIRE_VERSION 2.3
+ENV STAGING_KEY RANDOM
 
 RUN apt update -qq && apt install -y  --no-install-recommends \
 			apt-transport-https \
@@ -23,7 +24,6 @@ RUN apt update -qq && apt install -y  --no-install-recommends \
 		&& mkdir -p /empire \
 		&& tar zxf empire.tar.gz -C /empire --strip-components=1 \
 		&& cd /empire/setup/ \
-		&& export STAGING_KEY=$(date --iso-8601=ns | md5sum --text | cut -d " " -f 1) \
 		&& ./install.sh \
 		&& chmod +x /empire/empire \
 		&& rm /empire.tar.gz \
