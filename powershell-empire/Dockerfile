@@ -23,8 +23,7 @@ RUN apt update -qq && apt install -y  --no-install-recommends \
 	  && wget -nv https://github.com/EmpireProject/Empire/archive/$EMPIRE_VERSION.tar.gz --output-document /empire.tar.gz \
 		&& mkdir -p /empire \
 		&& tar zxf empire.tar.gz -C /empire --strip-components=1 \
-		&& cd /empire/setup/ \
-		&& ./install.sh \
+		&& cd /empire/setup/ && ./install.sh \
 		&& chmod +x /empire/empire \
 		&& rm /empire.tar.gz \
 		&& apt autoremove -y \

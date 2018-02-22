@@ -7,13 +7,15 @@ services:
     volumes:
       - $HOME/.neo4j/data:/data
       - ./neo4j-auth-file:/data/dbms/auth
+    ports:
+      - 7687:7687
 
-  bloodhound:
-     build: .
-     container_name: bloodhound
-     depends_on:
-       - neo4j
-     environment:
-       - DISPLAY=$DISPLAY
-     volumes:
-       - /tmp/.X11-unix:/tmp/.X11-unix
+  # bloodhound:
+  #    build: .
+  #    container_name: bloodhound
+  #    depends_on:
+  #      - neo4j
+  #    environment:
+  #      - DISPLAY=$DISPLAY
+  #    volumes:
+  #      - /tmp/.X11-unix:/tmp/.X11-unix
