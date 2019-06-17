@@ -1,1 +1,3 @@
-Official testssl image from : https://raw.githubusercontent.com/drwetter/testssl.sh/2.9dev/Dockerfile
+Official testssl image from : http://github.com/drwetter/testssl.sh
+
+Auto build : https://hub.docker.com/r/pierrickv/testssl
