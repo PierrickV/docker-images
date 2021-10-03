@@ -1,24 +1,34 @@
-FROM debian:stretch
+FROM debian:stable AS build
 
 ENV DEBIAN_FRONTEND noninteractive
+RUN set -e
 
 RUN apt update -qq && apt install -y \
       git \
       build-essential \
       libssl-dev \
       python \
-      zlibc \
-      libghc-zlib-dev \
-    && git clone --depth=1 https://github.com/magnumripper/JohnTheRipper.git \
-    && cd JohnTheRipper/src \
+      libghc-zlib-dev
+
+RUN git clone --depth=1 https://github.com/magnumripper/JohnTheRipper.git
+
+RUN cd JohnTheRipper/src \
     && ./configure \
     && make clean \
-    && make -s \
-    && chmod +x /JohnTheRipper/run/john \
-    && ln -s /JohnTheRipper/run/john /usr/bin/john \
-    && apt remove -y \
-        git \
-        build-essential \
-    && rm -rf /var/lib/apt/lists/*
+    && make -s
 
-WORKDIR "/JohnTheRipper/run/"
+
+FROM debian:stable-slim
+
+RUN useradd --create-home john
+COPY --from=build JohnTheRipper/ /home/john/JohnTheRipper
+RUN apt update && apt install \
+    libgomp1 \
+  && rm -rf /var/lib/apt/lists/*
+    
+RUN chmod +x /home/john/JohnTheRipper/run/john
+WORKDIR /home/john/
+USER john
+
+ENTRYPOINT ["/home/john/JohnTheRipper/run/john"]
+CMD ["/home/john/JohnTheRipper/run/john --help"]
