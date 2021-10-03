@@ -1,4 +1,4 @@
-FROM debian:9-slim
+FROM debian:unstable-slim
 
 RUN apt update -qq && apt install -y \
   hping3 \

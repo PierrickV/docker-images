@@ -1,5 +1,6 @@
-FROM node:stretch
+FROM node:bullseye
 
+RUN set -e
 RUN apt update -qq && apt install -y \
 		wget \
 		unzip \

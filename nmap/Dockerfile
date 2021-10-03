@@ -1,5 +1,7 @@
-FROM centos:7
+FROM debian:unstable-slim
 
-RUN rpm -vhU https://nmap.org/dist/nmap-7.70-1.x86_64.rpm
+RUN apt update -qq && apt install -y \
+  nmap \
+&& rm -rf /var/lib/apt/lists/*
 
 ENTRYPOINT ["nmap"]
